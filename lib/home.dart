@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bill_generator_flutter/input.dart';
 import 'package:bill_generator_flutter/save.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +13,11 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
   @override
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController company = TextEditingController();
+  TextEditingController items = TextEditingController();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -24,25 +28,23 @@ class _homepageState extends State<homepage> {
         child: ListView(
           children: [
             TextField(
+              controller: name,
               decoration: InputDecoration(
                 labelText: 'Name',
               ),
             ),
             TextField(
+              controller: email,
               decoration: InputDecoration(
                 labelText: 'E Mail',
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 1.0),
-                ),
-                // enabledBorder: OutlineInputBorder(
-                // borderSide: BorderSide(color: Colors.black, width: 1.0),
-                // ),
               ),
             ),
             TextField(
+              controller: phone,
               decoration: InputDecoration(labelText: 'Phone'),
             ),
             TextField(
+              controller: company,
               decoration: InputDecoration(labelText: 'Company Name'),
             ),
             item(),
@@ -51,7 +53,7 @@ class _homepageState extends State<homepage> {
             item(),
             item(),
             item(),
-            ElevatedButton(onPressed: _createPDF, child: Text("Generate Bill"))
+            ElevatedButton(onPressed: _createPDF, child: Text("Generate Bill")),
           ],
         ),
       ),
@@ -61,7 +63,7 @@ class _homepageState extends State<homepage> {
   Future<void> _createPDF() async {
     final PdfDocument document = PdfDocument();
     document.pages.add().graphics.drawString(
-        'Hello World!', PdfStandardFont(PdfFontFamily.helvetica, 12),
+        name.text, PdfStandardFont(PdfFontFamily.helvetica, 12),
         brush: PdfSolidBrush(PdfColor(0, 0, 0)),
         bounds: const Rect.fromLTWH(0, 0, 150, 20));
     List<int> bytes = document.save();
