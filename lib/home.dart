@@ -82,6 +82,15 @@ class _homepageState extends State<homepage> {
     document.template.bottom = footerTemplate;
     final PdfPage page = document.pages.add();
     final Size pageSize = page.getClientSize();
+
+    page.graphics
+        .drawString(name.text, PdfStandardFont(PdfFontFamily.helvetica, 12));
+    page.graphics
+        .drawString(company.text, PdfStandardFont(PdfFontFamily.helvetica, 12));
+    page.graphics
+        .drawString(email.text, PdfStandardFont(PdfFontFamily.helvetica, 12));
+    page.graphics
+        .drawString(phone.text, PdfStandardFont(PdfFontFamily.helvetica, 12));
     page.graphics.drawRectangle(
         bounds: Rect.fromLTWH(0, 0, pageSize.width, pageSize.height),
         pen: PdfPen(PdfColor(142, 170, 219, 255)));
@@ -120,7 +129,7 @@ class _homepageState extends State<homepage> {
         bounds: Rect.fromLTWH(
             0, 0, page.getClientSize().width, page.getClientSize().height));
 
-    File('PDFTable.pdf').writeAsBytes(document.save());
+    //File('PDFTable.pdf').writeAsBytes(document.save());
 
     List<int> bytes = document.save();
 
