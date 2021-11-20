@@ -19,6 +19,8 @@ class _homepageState extends State<homepage> {
   TextEditingController phone = TextEditingController();
   TextEditingController company = TextEditingController();
   TextEditingController items = TextEditingController();
+  TextEditingController qty = TextEditingController();
+  TextEditingController rate = TextEditingController();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -97,20 +99,22 @@ class _homepageState extends State<homepage> {
 
     final PdfGrid grid = PdfGrid();
 // Specify the grid column count.
-    grid.columns.add(count: 3);
+    grid.columns.add(count: 4);
 // Add a grid header row.
     final PdfGridRow headerRow = grid.headers.add(1)[0];
-    headerRow.cells[0].value = 'Customer ID';
-    headerRow.cells[1].value = 'Contact Name';
-    headerRow.cells[2].value = 'Country';
+    headerRow.cells[0].value = 'Item';
+    headerRow.cells[1].value = 'Rate';
+    headerRow.cells[2].value = 'Quantity';
+    headerRow.cells[2].value = 'Amount';
 // Set header font.
     headerRow.style.font =
         PdfStandardFont(PdfFontFamily.helvetica, 10, style: PdfFontStyle.bold);
 // Add rows to the grid.
     PdfGridRow row = grid.rows.add();
-    row.cells[0].value = 'ALFKI';
-    row.cells[1].value = 'Maria Anders';
-    row.cells[2].value = 'Germany';
+    row.cells[0].value = items.text;
+    row.cells[1].value = rate.text;
+    row.cells[2].value = qty.text;
+    row.cells[3].value = "amount";
 // Add next row.
     row = grid.rows.add();
     row.cells[0].value = 'ANATR';
